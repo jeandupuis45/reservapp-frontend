@@ -90,7 +90,6 @@ function App() {
     try {
       const res = await axios.post("http://localhost:5500/api/put-item",
         newObj)
-      // setListItems({ ...listItems, [res.startTime]: res.name });
     } catch (err) {
       console.log(err);
     }
@@ -145,7 +144,6 @@ function App() {
         {basicObjet.map((hour) => {
           return (
             <Paper variant="outlined" className='horaire' key={hour.startTime}>
-              {/* <p>Hourly : {hour.startTime.substring(0, 5)} - {hour.endTime.substring(0, 5)} </p> */}
               <TextField id="outlined-basic" label={hour.startTime.substring(0, 5)} variant="outlined" onChange={e =>
                 setListItems({
                   ...listItems,
