@@ -12,113 +12,113 @@ import Paper from '@mui/material/Paper';
 import InputAdornment from '@mui/material/InputAdornment';
 import ClearIcon from '@mui/icons-material/Clear';
 
-export function Calendar() {
+const Calendar = () => {
 
 
     const [listItems, setListItems] = useState([]);
     const [listItemsBackend, setListItemsBackend] = useState([]);
-  
+
     const [value, setValue] = React.useState(new Date().toISOString().split('T')[0]);
     const handleChange = (newValue) => {
-      const jsDate = new Date(newValue)
-      if (!isNaN(jsDate.getTime())) {
-        setValue(jsDate.toISOString().split('T')[0])
-      };
+        const jsDate = new Date(newValue)
+        if (!isNaN(jsDate.getTime())) {
+            setValue(jsDate.toISOString().split('T')[0])
+        };
     };
-  
+
     const basicObjet = [
-      {
-        startTime: "08:00:00",
-        "endTime": "09:00:00"
-      },
-      {
-        startTime: "09:00:00",
-        "endTime": "10:00:00"
-      },
-      {
-        startTime: "10:00:00",
-        "endTime": "11:00:00"
-      },
-      {
-        startTime: "11:00:00",
-        "endTime": "12:00:00"
-      },
-      {
-        startTime: "12:00:00",
-        "endTime": "13:00:00"
-      },
-      {
-        startTime: "13:00:00",
-        "endTime": "14:00:00"
-      },
-      {
-        startTime: "14:00:00",
-        "endTime": "15:00:00"
-      },
-      {
-        startTime: "15:00:00",
-        "endTime": "16:00:00"
-      },
-      {
-        startTime: "16:00:00",
-        "endTime": "17:00:00"
-      },
-      {
-        startTime: "17:00:00",
-        "endTime": "18:00:00"
-      },
-  
+        {
+            startTime: "08:00:00",
+            "endTime": "09:00:00"
+        },
+        {
+            startTime: "09:00:00",
+            "endTime": "10:00:00"
+        },
+        {
+            startTime: "10:00:00",
+            "endTime": "11:00:00"
+        },
+        {
+            startTime: "11:00:00",
+            "endTime": "12:00:00"
+        },
+        {
+            startTime: "12:00:00",
+            "endTime": "13:00:00"
+        },
+        {
+            startTime: "13:00:00",
+            "endTime": "14:00:00"
+        },
+        {
+            startTime: "14:00:00",
+            "endTime": "15:00:00"
+        },
+        {
+            startTime: "15:00:00",
+            "endTime": "16:00:00"
+        },
+        {
+            startTime: "16:00:00",
+            "endTime": "17:00:00"
+        },
+        {
+            startTime: "17:00:00",
+            "endTime": "18:00:00"
+        },
+
     ]
-  
-  
-  
+
+
+
     const changeObjet = (listeObjet) => {
-  
-      const obj = {}
-  
-      listeObjet.map(listeObjetElem => {
-        obj[listeObjetElem.startTime] = listeObjetElem.name
-      })
-  
-      return obj
+
+        const obj = {}
+
+        listeObjet.map(listeObjetElem => {
+            obj[listeObjetElem.startTime] = listeObjetElem.name
+        })
+
+        return obj
     }
-  
-  
+
+
     const addItem = async (newObj) => {
-      try {
-        const res = await axios.post("http://localhost:5500/reservation/put-item",
-          newObj)
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  
-  
-    useEffect(() => {
-      const getItemList = async () => {
         try {
-          const res = await axios.post("http://localhost:5500/reservation/get-items",
-            {
-              "date": value
-            })
-        console.log(res.data)
-          setListItems(changeObjet(res.data));
-          setListItemsBackend(changeObjet(res.data));
+            await axios.post("http://localhost:5500/reservation/put-item",
+                newObj)
         } catch (err) {
-          console.log(err);
+            console.log(err);
         }
-      }
-      getItemList()
+    }
+
+
+    useEffect(() => {
+        const getItemList = async () => {
+            try {
+                const res = await axios.post("http://localhost:5500/reservation/get-items",
+                    {
+                        "date": value
+                    })
+                console.log(res.data)
+                setListItems(changeObjet(res.data));
+                setListItemsBackend(changeObjet(res.data));
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        getItemList()
     }, [value]);
-  
-  
-  
+
+
+
     const deleteItem = async (id) => {
-      try {
-        const res = await axios.delete(`http://localhost:5500/reservation/item/${id}`)
-      } catch (err) {
-        console.log(err)
-      }
+        try {
+            await axios.delete(`http://localhost:5500/reservation/item/${id}`)
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     return (
@@ -126,7 +126,9 @@ export function Calendar() {
 
 
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <Stack spacing={3} className="date">
+                <Stack spacing={3} sx={{
+                    width: '300px',
+                }}>
                     <DesktopDatePicker
                         label="Date desktop"
                         inputFormat="YYYY-MM-DD"
@@ -137,18 +139,40 @@ export function Calendar() {
                 </Stack>
             </LocalizationProvider>
 
-            <div className="reservation">
+            <div style={{
+                width: '100%',
+                paddingBottom: '10px',
+                rowGap: '10px',
+                columnGap: '20px',
+                overflow: 'auto',
+            }}>
 
                 {basicObjet.map((hour) => {
                     return (
-                        <Paper variant="outlined" className='horaire' key={hour.startTime}>
+                        <Paper variant="outlined" key={hour.startTime}
+                            style={{
+                                padding: '5px',
+                                paddingTop: '10px',
+                                marginLeft: 'auto',
+                                marginRight: 'auto',
+                                marginTop: '20px',
+                                width: '90%',
+                                maxWidth: '500px',
+                                minWidth: '300px',
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                            }}>
                             <TextField id="outlined-basic" label={hour.startTime.substring(0, 5)} variant="outlined" onChange={e =>
                                 setListItems({
                                     ...listItems,
                                     [hour.startTime]: e.target.value
                                 })}
                                 value={listItems[hour.startTime] || ''}
-                                className="input"
+                                sx={{
+                                    width: 'calc(100% - 80px)',
+                                }}
                                 InputLabelProps={{ shrink: true }}
                                 InputProps={{
                                     endAdornment:
@@ -161,7 +185,12 @@ export function Calendar() {
                                 }}
                             />
 
-                            <div className="button">
+                            <div style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                width: '70px',
+                                rowGap: '2px',
+                            }}>
 
 
                                 <Button
@@ -227,8 +256,10 @@ export function Calendar() {
 
             </div>
 
-        </div>
+        </div >
 
     );
 
 }
+
+export default Calendar

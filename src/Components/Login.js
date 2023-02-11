@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import axios from 'axios';
 
@@ -11,34 +11,37 @@ import Button from '@mui/material/Button';
 
 import HttpsIcon from '@mui/icons-material/Https';
 import PersonIcon from '@mui/icons-material/Person';
-import { useSelect } from "@mui/base";
 
-export function Login(props) {
+const Login = (props) => {
 
-    const[loginPassword, setLoginPassword] = useState("")
-    const[isIdentified, setIsIdentified] = useState(false)
+    const [loginPassword, setLoginPassword] = useState("")
+    const [isIdentified, setIsIdentified] = useState(false)
 
-    console.log("isIdentified : ",  isIdentified)
+    console.log("isIdentified : ", isIdentified)
 
 
     const getUser = async () => {
         try {
-          const res = await axios.post("http://localhost:5500/user/get-items",
-          {
-            "userName": props.loginUserName,
-            "password": loginPassword
-          })
-          props.setDisplay("")
-          setIsIdentified(res.data.userExists)
-          props.setConnected(res.data.userExists.toString())
+            const res = await axios.post("http://localhost:5500/user/get-items",
+                {
+                    "userName": props.loginUserName,
+                    "password": loginPassword
+                })
+            props.setDisplay("")
+            setIsIdentified(res.data.userExists)
+            props.setConnected(res.data.userExists.toString())
         } catch (err) {
-          console.log(err);
+            console.log(err);
         }
-      }
+    }
 
 
     return (
-        <div className="account">
+        <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+        }}>
 
             <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                 <InputLabel>Username</InputLabel>
@@ -80,9 +83,11 @@ export function Login(props) {
                 onClick={() => getUser()
                 }
             >Login</Button>
-            
+
             <p>{isIdentified}</p>
 
         </div>
     )
 }
+
+export default Login

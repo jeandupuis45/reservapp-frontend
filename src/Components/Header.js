@@ -1,23 +1,23 @@
 import React from "react";
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
 
-import HttpsIcon from '@mui/icons-material/Https';
-import PersonIcon from '@mui/icons-material/Person';
 
-
-export function Header(props) {
+const Header = (props) => {
 
 
     return (
 
-        <div className="header">
+        <div style={{
+            backgroundColor: '#1E90FF',
+            width: '100%',
+            maxHeight: '60px',
+            minHeight: '60px',
+            marginBottom: '20px',
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+        }}>
 
             <div style={{
                 width: "180px",
@@ -41,7 +41,13 @@ export function Header(props) {
             </div>
 
 
-            <h1 className="title">Reserv'App</h1>
+            <h1 style={{
+                textAlign: 'center',
+                color: 'white',
+                padding: '10px',
+                margin: '0px',
+                flex: 1,
+            }}>Reserv'App</h1>
 
             <div style={{
                 width: "180px",
@@ -83,7 +89,9 @@ export function Header(props) {
 
             </div>
 
-        </div>
+        </div >
 
     )
 }
+
+export default Header

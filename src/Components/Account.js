@@ -28,7 +28,11 @@ const Account = () => {
     }
 
     return (
-        <div className="account">
+        <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+        }}>
 
             <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                 <InputLabel>Username</InputLabel>
