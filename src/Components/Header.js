@@ -1,6 +1,19 @@
 import React from "react";
 
-import Button from '@mui/material/Button';
+
+import { Typography } from "@mui/material";
+import { styled } from '@mui/system';
+
+const CustomButton = styled(Typography)({
+    color: 'white',
+    fontWeight: '40',
+    fontSize: "20px",
+    textAlign: 'center',
+    cursor: 'pointer',
+    "&:hover": {
+        textDecoration: 'underline'
+    }
+  });
 
 
 const Header = (props) => {
@@ -20,23 +33,17 @@ const Header = (props) => {
         }}>
 
             <div style={{
-                width: "180px",
+                width: "160px",
 
             }}>
 
-                <Button
-                    style={{
-                        color: 'white',
-                        fontWeight: '40',
-                        backgroundColor: '#1E90FF',
-                        fontSize: "14px",
-                    }}
+                <CustomButton
                     onClick={() => {
                         props.setDisplay("")
                     }
                     }
                 >Home
-                </Button>
+                </CustomButton>
 
             </div>
 
@@ -50,19 +57,13 @@ const Header = (props) => {
             }}>Reserv'App</h1>
 
             <div style={{
-                width: "180px",
+                width: "160px",
 
             }}>
 
-                <Button
-                    style={{
-                        color: 'white',
-                        fontWeight: '40',
-                        backgroundColor: '#1E90FF',
-                        fontSize: "14px"
-                    }}
+                <CustomButton
                     onClick={() => {
-                        if (props.connected == "true") {
+                        if (props.connected === "true") {
                             props.setDisplay("")
                             props.setConnected("false")
                         } else {
@@ -70,26 +71,19 @@ const Header = (props) => {
                         }
                     }
                     }
-                >{props.connected == "true" ? "Logout" : 'Register'}
-                </Button>
+                >{props.connected === "true" ? "Logout" : 'Register'}
+                </CustomButton>
 
-                <Button
-                    style={{
-                        color: 'white',
-                        fontWeight: '40',
-                        backgroundColor: '#1E90FF',
-                        fontSize: "14px",
-                    }}
+                <CustomButton
                     onClick={() => {
                         props.setDisplay("login")
                     }
                     }
-                >{props.connected == "true" ? props.loginUserName : 'Login'}
-                </Button>
+                >{props.connected === "true" ? props.loginUserName : 'Login'}
+                </CustomButton>
 
             </div>
-
-        </div >
+        </div>
 
     )
 }

@@ -6,13 +6,13 @@ import Calendar from './Calendar';
 const Body = (props) => {
 
 
-    if (props.display == "register") {
+    if (props.display === "register") {
         return (
             <Account />
         )
     }
 
-    if (props.display == "login") {
+    if (props.display === "login") {
         return (
             <Login setConnected={props.setConnected} loginUserName={props.loginUserName} setLoginUserName={props.setLoginUserName} setDisplay={props.setDisplay} />
         )

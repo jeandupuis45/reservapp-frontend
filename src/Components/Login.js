@@ -15,10 +15,6 @@ import PersonIcon from '@mui/icons-material/Person';
 const Login = (props) => {
 
     const [loginPassword, setLoginPassword] = useState("")
-    const [isIdentified, setIsIdentified] = useState(false)
-
-    console.log("isIdentified : ", isIdentified)
-
 
     const getUser = async () => {
         try {
@@ -28,7 +24,6 @@ const Login = (props) => {
                     "password": loginPassword
                 })
             props.setDisplay("")
-            setIsIdentified(res.data.userExists)
             props.setConnected(res.data.userExists.toString())
         } catch (err) {
             console.log(err);
@@ -83,8 +78,6 @@ const Login = (props) => {
                 onClick={() => getUser()
                 }
             >Login</Button>
-
-            <p>{isIdentified}</p>
 
         </div>
     )

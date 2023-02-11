@@ -4,8 +4,6 @@ import { useState } from 'react';
 import Body from './Components/Body';
 import Header from './Components/Header';
 
-import './App.css';
-
 function App() {
 
   const [display, setDisplay] = useState("")

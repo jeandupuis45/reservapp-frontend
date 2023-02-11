@@ -88,8 +88,7 @@ const Account = () => {
                     fontSize: "14px",
                 }}
                 onClick={() => {
-                    if (userConfirmedPassword != userPassword) {
-                        console.log("Marche")
+                    if (userConfirmedPassword !== userPassword) {
                         return (
                             alert("Password and confirmed password are not the same, please try again.")
                         )
